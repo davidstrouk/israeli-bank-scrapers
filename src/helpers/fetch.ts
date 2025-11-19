@@ -1,5 +1,8 @@
+import { getDebug } from './debug';
 import nodeFetch from 'node-fetch';
 import { type Page } from 'puppeteer';
+
+const debug = getDebug('fetch');
 
 const JSON_CONTENT_TYPE = 'application/json';
 
@@ -35,7 +38,9 @@ export async function fetchPost(url: string, data: Record<string, any>, extraHea
     body: JSON.stringify(data),
   };
   const result = await nodeFetch(url, request);
-  return result.json();
+  const text = await result.text();
+  debug(text);
+  return JSON.parse(text);
 }
 
 export async function fetchGraphql<TResult>(

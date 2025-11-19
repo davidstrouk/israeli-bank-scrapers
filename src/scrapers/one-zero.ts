@@ -80,7 +80,7 @@ type Movement = {
 
 type QueryPagination = { hasMore: boolean; cursor: string };
 
-const IDENTITY_SERVER_URL = 'https://identity.tfd-bank.com/v1/';
+const IDENTITY_SERVER_URL = 'https://identity.tfd-bank.com/v1';
 
 const GRAPHQL_API_URL = 'https://mobile.tfd-bank.com/mobile-graph/graphql';
 
@@ -111,11 +111,12 @@ export default class OneZeroScraper extends BaseScraper<ScraperSpecificCredentia
       extClientId: 'mobile',
       os: 'Android',
     });
+    debug(deviceTokenResponse);
 
     const {
       resultData: { deviceToken },
     } = deviceTokenResponse;
-
+    debug(deviceToken);
     debug(`Sending OTP to phone number ${phoneNumber}`);
 
     const otpPrepareResponse = await fetchPost(`${IDENTITY_SERVER_URL}/otp/prepare`, {
@@ -123,6 +124,7 @@ export default class OneZeroScraper extends BaseScraper<ScraperSpecificCredentia
       deviceToken,
       otpChannel: 'SMS_OTP',
     });
+    debug(otpPrepareResponse);
 
     const {
       resultData: { otpContext },

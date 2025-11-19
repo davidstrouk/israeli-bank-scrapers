@@ -1,0 +1,14 @@
+# Exclude examples directory from linting
+# (examples are meant to be standalone runnable scripts)
+examples/
+
+# Build output
+lib/
+
+# Node modules
+node_modules/
+
+# Test configuration
+src/tests/.tests-config.js
+
+

@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "outDir": "../lib/examples"
+  },
+  "include": ["./*.ts", "../src/**/*"],
+  "exclude": ["node_modules"]
+}
+
+

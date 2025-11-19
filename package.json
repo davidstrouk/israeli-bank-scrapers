@@ -24,7 +24,8 @@
     "postbuild": "rimraf lib/tests",
     "prepare:core": "git reset --hard && node utils/prepare-israeli-bank-scrapers-core.js && npm i --package-lock-only && npm ci && npm run lint:fix && npm run build",
     "prepare:default": "git reset --hard && npm ci && npm run build",
-    "reset": "git reset --hard && npm ci"
+    "reset": "git reset --hard && npm ci",
+    "example:otp": "ts-node examples/otp-authentication.ts"
   },
   "repository": {
     "type": "git",
@@ -72,6 +73,7 @@
     "rimraf": "^3.0.0",
     "source-map-support": "^0.5.16",
     "ts-jest": "^29.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^4.7.4"
   },
   "dependencies": {
@@ -84,6 +86,9 @@
     "node-fetch": "^2.2.0",
     "puppeteer": "22.15.0",
     "uuid": "^9.0.1"
+  },
+  "optionalDependencies": {
+    "enquirer": "^2.4.1"
   },
   "files": [
     "lib/**/*"
