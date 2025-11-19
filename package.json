@@ -22,7 +22,10 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline --verbose",
     "postbuild": "rimraf lib/tests",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run clean && npm run build:types && npm run build:js && rimraf lib/tests",
+    "prepublishOnly": "node utils/pre-publish.js && npm run build",
+    "publish:prepare": "node utils/pre-publish.js",
+    "publish:version": "node utils/pre-publish.js --version",
     "prepare:core": "git reset --hard && node utils/prepare-israeli-bank-scrapers-core.js && npm i --package-lock-only && npm ci && npm run lint:fix && npm run build",
     "prepare:default": "git reset --hard && npm ci && npm run build",
     "reset": "git reset --hard && npm ci"
@@ -87,6 +90,8 @@
     "uuid": "^9.0.1"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "!lib/**/*.test.js",
+    "!lib/**/*.test.d.ts"
   ]
 }
