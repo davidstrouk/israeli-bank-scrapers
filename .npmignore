@@ -1,0 +1,58 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage
+.nyc_output
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+
+# IDEs
+.idea
+.vscode
+.DS_Store
+
+# Source files (we only want the built lib/ in the package)
+src/
+
+# Tests
+tests/
+
+# Build config
+tsconfig.json
+tsconfig.build.json
+jest.config.js
+.eslintrc*
+.prettierrc*
+
+# CI/CD
+.github/
+.husky/
+
+# Utils
+utils/
+
+# Documentation
+CONTRIBUTING.md
+
