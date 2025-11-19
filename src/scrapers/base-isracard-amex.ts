@@ -424,6 +424,7 @@ class IsracardAmexBaseScraper extends BaseScraperWithBrowser<ScraperSpecificCred
       companyCode: this.companyCode,
     };
     const validateResult = await fetchPostWithinPage<ScrapedLoginValidation>(this.page, validateUrl, validateRequest);
+    debug('validateResult', JSON.stringify(validateResult, null, 2));
     if (
       !validateResult ||
       !validateResult.Header ||
