@@ -57,11 +57,23 @@ export function fetchGetWithinPage<TResult>(page: Page, url: string): Promise<TR
       fetch(innerUrl, {
         credentials: 'include',
       })
-        .then(result => {
+        .then(async result => {
           if (result.status === 204) {
             resolve(null);
+          } else if (!result.ok) {
+            const text = await result.text();
+            reject(new Error(`HTTP ${result.status}: ${text.substring(0, 200)}`));
           } else {
-            resolve(result.json());
+            const text = await result.text();
+            if (!text || text.trim() === '') {
+              resolve(null);
+            } else {
+              try {
+                resolve(JSON.parse(text));
+              } catch (e) {
+                reject(new Error(`Invalid JSON response: ${text.substring(0, 200)}`));
+              }
+            }
           }
         })
         .catch(e => {
@@ -90,12 +102,24 @@ export function fetchPostWithinPage<TResult>(
             innerExtraHeaders,
           ),
         })
-          .then(result => {
+          .then(async result => {
             if (result.status === 204) {
               // No content response
               resolve(null);
+            } else if (!result.ok) {
+              const text = await result.text();
+              reject(new Error(`HTTP ${result.status}: ${text.substring(0, 200)}`));
             } else {
-              resolve(result.json());
+              const text = await result.text();
+              if (!text || text.trim() === '') {
+                resolve(null);
+              } else {
+                try {
+                  resolve(JSON.parse(text));
+                } catch (e) {
+                  reject(new Error(`Invalid JSON response: ${text.substring(0, 200)}`));
+                }
+              }
             }
           })
           .catch(e => {
